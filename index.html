@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function (){
+            var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLZXZpbiIsImlhdCI6MTcwNjI5MDQ1NSwiZXhwIjoxNzA2MjkyMjU1fQ.bAfTm8XIQfcB4XqcHsDTq4QZRXORFlVgIsLDR4RcGev7E8I2lEzfv84Xbsn2pbj24ScPU1ALd4H-0ehByD1tZA";
+            $.ajax({
+                url: "http://localhost:8080/remitente/listar",
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + token
+                },
+                success: function (datos) {
+                    console.log(datos);
+                }
+            })
+        })
+    
+    </script>
+</head>
+<body>
+</body>
+</html>

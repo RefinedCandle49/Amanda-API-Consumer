@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>Actualizar</title>
+</head>
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="listar.html">Listar</a>
+            </li>
+            <li>
+                <a href="registrar.html">Registrar</a>
+            </li>
+            <li>
+                <a href="actualizar.html">Actualizar</a>
+            </li>
+            <li>
+                <a href="eliminar.html">Eliminar</a>
+            </li>
+            <li>
+                <a href="mostrarEnvio.html">Rastrear envio</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<body>
+    <h1>Editar</h1>
+    <form id="form-editar-remitente" method="post">
+        <label for="idRemitente">ID Remitente:</label><br>
+        <input type="number" id="idRemitente" name="idRemitente"><br>
+        <label for="nombreRemitente">Nombre Remitente:</label><br>
+        <input type="text" id="nombreRemitente" name="nombreRemitente"><br>
+        <label for="dniRemitente">DNI Remitente:</label><br>
+        <input type="text" id="dniRemitente" name="dniRemitente"><br>
+        <label for="telefono">Teléfono:</label><br>
+        <input type="tel" id="telefono" name="telefono"><br>
+        <input type="submit" value="Actualizar Remitente">
+    </form>
+
+    <script src="remitente.js"></script>
+</body>
+</html>

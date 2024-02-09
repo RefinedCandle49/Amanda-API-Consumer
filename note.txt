@@ -1,0 +1,37 @@
+function obtenerEnvio(idEnvio) {
+    obtenerToken().then(function(token) {
+        $.ajax({
+            url: "http://localhost:8080/envio/listar/" + idEnvio,
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token
+            },
+            
+            success: function (envio) {
+                var contenedorEnvio = document.getElementById("contenedor-envio");
+                contenedorEnvio.innerHTML = "";
+                for (var key in envio) {
+                    if (typeof envio[key] === 'object' && envio[key] !== null) {
+                        for (var subKey in envio[key]) {
+                            var elementoEnvio = document.createElement("p");
+                            elementoEnvio.innerHTML = key + ": " + subKey + ": " + envio[key][subKey];
+                            contenedorEnvio.appendChild(elementoEnvio);
+                        }
+                    } else {
+                        var elementoEnvio = document.createElement("p");
+                        elementoEnvio.innerHTML = key + ": " + envio[key];
+                        contenedorEnvio.appendChild(elementoEnvio);
+                    }
+                }
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    });
+}
+
+$('#form-obtener-envio').on('submit', function(event) {
+    event.preventDefault();
+    obtenerEnvio($('#idEnvio').val());
+});

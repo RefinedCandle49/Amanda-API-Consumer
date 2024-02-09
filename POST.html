@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function (){
+            var token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLZXZpbiIsImlhdCI6MTcwNjI5MDQ1NSwiZXhwIjoxNzA2MjkyMjU1fQ.bAfTm8XIQfcB4XqcHsDTq4QZRXORFlVgIsLDR4RcGev7E8I2lEzfv84Xbsn2pbj24ScPU1ALd4H-0ehByD1tZA";
+            var data = {
+                "idRemitente": "10",
+                "nombreRemitente": "Nombre Remitente 10",
+                "dniRemitente": "DNI 10",
+                "telefono": "56789012"
+            };
+            $.ajax({
+                url: "http://localhost:8080/remitente/registrar",
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + token
+                },
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (datos) {
+                    console.log(datos);
+                }
+            })
+        })
+    
+    </script>
+</head>
+<body>
+Hola
+</body>
+</html>

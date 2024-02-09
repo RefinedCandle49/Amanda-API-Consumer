@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: "http://localhost:8080/usuario/autenticar",
+                method: "POST",
+                data: JSON.stringify({
+                    username: "Kevin",
+                    password: "12345"
+                }),
+                contentType: "application/json",
+                success: function (token) {
+                    console.log(token);
+                    // Ahora puedes utilizar el token para hacer una solicitud GET a la URL http://localhost:8080/remitente/listar
+                    $.ajax({
+                        url: "http://localhost:8080/remitente/listar",
+                        method: "GET",
+                        headers: {
+                            "Authorization": "Bearer " + token
+                        },
+                        success: function (datos) {
+                            console.log(datos);
+                            // Aquí puedes utilizar los datos obtenidos de la solicitud GET
+                        }
+                    });
+                }
+            });
+        });
+
+
+
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
