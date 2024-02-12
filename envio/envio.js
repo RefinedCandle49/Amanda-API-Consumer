@@ -1,20 +1,7 @@
 $(document).ready(function() {
-    // Función para agregar un nuevo conjunto de campos de detalle del paquete
-    function agregarDetalle() {
-        var index = $('.detallePaqueteItem').length;
-        var newDetail = '<div class="detallePaqueteItem">' +
-                            '<label for="descripcion' + (index +  1) + '">Descripción:</label><br>' +
-                            '<input type="text" id="descripcion' + (index +  1) + '" name="descripcion[]"><br>' +
-                            '<label for="cantidad' + (index +  1) + '">Cantidad:</label><br>' +
-                            '<input type="number" id="cantidad' + (index +  1) + '" name="cantidad[]"><br>' +
-                        '</div>';
-        $('#detallePaqueteContainer').append(newDetail);
-    }
 
     // Evento para agregar un nuevo detalle del paquete
-    $('#agregarDetalle').click(function() {
-        agregarDetalle();
-    });
+    
 
     // Función para obtener el token de autenticación
     function obtenerToken() {
@@ -41,6 +28,14 @@ $(document).ready(function() {
     // Función para crear el envío
     function crearEnvio() {
         obtenerToken().then(function(token) {
+            // Recoger todos los detalles del paquete
+            var detallePaquete = [];
+            $('.detallePaqueteItem').each(function() {
+                var descripcion = $(this).find('input[name^="descripcion"]').val();
+                var cantidad = $(this).find('input[name^="cantidad"]').val();
+                detallePaquete.push({ descripcion: descripcion, cantidad: cantidad });
+            });
+    
             var data = {
                 origen: $('#origen').val(),
                 destino: $('#destino').val(),
@@ -60,14 +55,9 @@ $(document).ready(function() {
                     peso: $('#peso').val(),
                     medidas: $('#medidas').val()
                 },
-                detallePaquete: [
-                    {
-                        descripcion: $('#descripcion').val(),
-                        cantidad: $('#cantidad').val()
-                    }
-                ]
+                detallePaquete: detallePaquete // Usamos el array recogido anteriormente
             };
-
+    
             $.ajax({
                 url: "http://localhost:8080/envio/registrar",
                 method: "POST",
@@ -95,4 +85,36 @@ $(document).ready(function() {
         event.preventDefault();
         crearEnvio();
     });
+
+    // Función para agregar un nuevo campo de detalle del paquete
+function agregarDetalle() {
+    var container = $('#detallePaqueteContainer');
+    var index = container.children('.detallePaqueteItem').length;
+
+    var newDetail = $('<div class="detallePaqueteItem">')
+        .append($('<label for="descripcion' + index + '">Descripción:</label><br>'))
+        .append($('<input type="text" id="descripcion' + index + '" name="descripcion' + index + '"><br>'))
+        .append($('<label for="cantidad' + index + '">Cantidad:</label><br>'))
+        .append($('<input type="number" id="cantidad' + index + '" name="cantidad' + index + '"><br>'));
+
+    container.append(newDetail);
+}
+
+$('#agregarDetalle').click(function() {
+    agregarDetalle();
+});
+
+function eliminarUltimoDetalle() {
+    var container = $('#detallePaqueteContainer');
+    if (container.children('.detallePaqueteItem').length >  1) {
+        container.children('.detallePaqueteItem').last().remove();
+    } else {
+        alert('Debes agregar al menos un detalle.');
+    }
+}
+
+$('#eliminarDetalle').click(function() {
+    eliminarUltimoDetalle();
+});
+
 });
