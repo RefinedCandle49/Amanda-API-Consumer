@@ -11,3 +11,9 @@ th, td {
     text-align: left;
     padding: 8px;
 }
+
+ul{
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}

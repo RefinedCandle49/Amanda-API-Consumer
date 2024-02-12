@@ -38,7 +38,6 @@ $.getScript('auth.js', function() {
   function crearRemitente() {
       obtenerToken().then(function(token) {
           var data = {
-              idRemitente: $('#idRemitente').val(),
               nombreRemitente: $('#nombreRemitente').val(),
               dniRemitente: $('#dniRemitente').val(),
               telefono: $('#telefono').val()
