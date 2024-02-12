@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Consulta de Envío</title>
+</head>
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="registrar.html">Registrar</a>
+            </li>
+            <li>
+                <a href="mostrarEnvio.html">Rastrear envio</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<body>
+<h1>Consulta de Envío</h1>
+<form id="consultaForm">
+    <label for="idEnvio">ID del Envío:</label>
+    <input type="text" id="idEnvio" name="idEnvio">
+    <button type="submit">Consultar</button>
+</form>
+<div id="contenedor-envio"></div>
+<h3>Interior del paquete</h3>
+<div id="contenedor-detalle"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="envio.js"></script>
+</body>
+</html>

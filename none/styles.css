@@ -1,0 +1,19 @@
+:root{
+    color-scheme: dark;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    border: 1px solid;
+    text-align: left;
+    padding: 8px;
+}
+
+ul{
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
