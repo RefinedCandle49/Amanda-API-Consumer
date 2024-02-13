@@ -1,16 +1,16 @@
-:root{
-    color-scheme: dark;
-}
+/*:root{*/
+/*    color-scheme: dark;*/
+/*}*/
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-th, td {
-    border: 1px solid;
-    text-align: left;
-    padding: 8px;
-}
+/*table {*/
+/*    border-collapse: collapse;*/
+/*    width: 100%;*/
+/*}*/
+/*th, td {*/
+/*    border: 1px solid;*/
+/*    text-align: left;*/
+/*    padding: 8px;*/
+/*}*/
 
 ul{
     display: flex;
@@ -18,6 +18,3 @@ ul{
     list-style: none;
 }
 
-input, textarea, select{
-    display: flex;
-}
