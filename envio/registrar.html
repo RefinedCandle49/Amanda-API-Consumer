@@ -33,94 +33,127 @@
 <body>
 
 
-<form id="form-envio">
-    <h1>Crear envio</h1>
-    <h2>Información General</h2>
-    <label for="origen">Origen:
-        <input type="text" id="origen" name="origen">
-    </label>
-    
-    <label for="destino">Destino:
-        <input type="text" id="destino" name="destino">
-    </label>
-    
-    <label for="estado">Estado:
-        <select id="estado" name="estado">
-            <option value="En tránsito">En tránsito</option>
-            <option value="Entregado">Entregado</option>
-            <option value="Retrasado">Retrasado</option>
-        </select>
-    </label>
-    
-    <label for="observaciones">Observaciones:
-        <textarea id="observaciones" name="observaciones"></textarea>
-    </label>
-    
-    
-    <!-- Campos del remitente -->
-    <h2>Remitente</h2>
-    <label for="nombreRemitente">Nombre Remitente:
-        <input type="text" id="nombreRemitente" name="nombreRemitente">
-    </label>
-    
-    <label for="dniRemitente">DNI Remitente:
-        <input type="text" id="dniRemitente" name="dniRemitente">
-    </label>
-    
-    <label for="telefonoRemitente">Teléfono Remitente:
-        <input type="tel" id="telefonoRemitente" name="telefonoRemitente">
-    </label>
-    
-    
-    <!-- Campos del destinatario -->
-    <h2>Destinatario</h2>
-    <label for="nombreDestinatario">Nombre Destinatario:
-        <input type="text" id="nombreDestinatario" name="nombreDestinatario">
-    </label>
-    
-    <label for="direccionDestinatario">Dirección Destinatario:
-        <input type="text" id="direccionDestinatario" name="direccionDestinatario">
-    </label>
-    
-    <label for="telefonoDestinatario">Teléfono Destinatario:
-        <input type="tel" id="telefonoDestinatario" name="telefonoDestinatario">
-    </label>
-    
-    
-    <!-- Campos del paquete -->
-    <h2>Paquete</h2>
-    <label for="peso">Peso:
-        <input type="number" step="0.1" id="peso" name="peso">
-    </label>
-    
-    <label for="medidas">Medidas:
-        <input type="text" id="medidas" name="medidas">
-    </label>
-    
-    
-    <!-- Detalle del paquete -->
-    <h2>Detalle del Paquete</h2>
-    <div id="detallePaqueteContainer">
-        <div class="detallePaqueteItem">
-            <label for="descripcion">Descripción:
-                <input type="text" id="descripcion" name="descripcion">
-            </label>
+<div class="container mt-3">
+<!--    <h2>Crear envio</h2>-->
+    <form id="form-envio" method="post">
+        <fieldset class="row border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">Información general</legend>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="origen" class="form-label">Origen:</label>
+                    <input type="text" class="form-control" id="origen" name="origen">
+                </div>
+                <div class="form-group">
+                    <label for="estado" class="form-label">Estado:</label>
+                    <select class="form-select" id="estado" name="estado">
+                        <option value="En tránsito">En tránsito</option>
+                        <option value="Entregado">Entregado</option>
+                        <option value="Retrasado">Retrasado</option>
+                    </select>
+                </div>
+            </div>
             
-            <label for="cantidad">Cantidad:
-                <input type="number" id="cantidad" name="cantidad">
-            </label>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="destino" class="form-label">Destino:</label>
+                    <input type="text" class="form-control" id="destino" name="destino">
+                </div>
+                <div class="form-group">
+                    <label for="observaciones" class="form-label">Observaciones:</label>
+                    <textarea class="form-control" id="observaciones" name="observaciones"></textarea>
+                </div>
+            </div>
         
-        </div>
-    </div>
-    <!-- Botón para agregar un nuevo campo de detalle del paquete -->
-    <button type="button" id="agregarDetalle">Agregar Detalle</button>
-    
-    <!-- Botón para eliminar el último campo de detalle del paquete (opcional) -->
-    <button type="button" id="eliminarDetalle">Eliminar Detalle</button>
-    <input type="submit" value="Crear Envío">
-    <!-- Botones de acci\ufffdn -->
-
-</form>
+        </fieldset>
+        <fieldset class="row border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">Remitente</legend>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="nombreRemitente" class="form-label">Nombre Remitente:</label>
+                    <input type="text" class="form-control" id="nombreRemitente" name="nombreRemitente">
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefonoRemitente" class="form-label">Teléfono Remitente:</label>
+                    <input type="tel" class="form-control" id="telefonoRemitente" name="telefonoRemitente">
+                </div>
+                
+            </div>
+            
+            <div class="col-md-6">
+                <label for="dniRemitente" class="form-label">DNI Remitente:</label>
+                <input type="text" class="form-control" id="dniRemitente" name="dniRemitente">
+            </div>
+        
+        </fieldset>
+        
+        <fieldset class="row border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">Destinatario</legend>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="nombreDestinatario" class="form-label">Nombre Destinatario:</label>
+                    <input type="text" class="form-control" id="nombreDestinatario" name="nombreDestinatario">
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefonoDestinatario" class="form-label">Teléfono Destinatario:</label>
+                    <input type="tel" class="form-control" id="telefonoDestinatario" name="telefonoDestinatario">
+                </div>
+            
+            </div>
+            
+            <div class="col-md-6">
+                
+                <div class="form-group">
+                    <label for="direccionDestinatario" class="form-label">Dirección Destinatario:</label>
+                    <input type="text" class="form-control" id="direccionDestinatario" name="direccionDestinatario">
+                </div>
+            </div>
+        
+        </fieldset>
+        
+        <fieldset class="row border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">Paquete</legend>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="peso" class="form-label">Peso:</label>
+                    <input type="number" step="0.1" class="form-control" id="peso" name="peso">
+                </div>
+            
+            </div>
+            
+            <div class="col-md-6">
+                <label for="medidas" class="form-label">Medidas:</label>
+                <input type="text" class="form-control" id="medidas" name="medidas">
+            </div>
+        
+        </fieldset>
+        
+        <fieldset class="row border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">Detalle del Paquete</legend>
+            <div id="detallePaqueteContainer" class="row">
+                <div class="detallePaqueteItem col-md-6">
+                    <label for="descripcion" class="form-label">Descripción:</label>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion">
+                    
+                </div>
+                <div class="detallePaqueteItem col-md-6">
+                    <label for="cantidad" class="form-label">Cantidad:</label>
+                    <input type="number" class="form-control" id="cantidad" name="cantidad">
+                </div>
+            </div>
+        
+        </fieldset>
+        <!-- Botón para agregar un nuevo campo de detalle del paquete -->
+        <button type="button" id="agregarDetalle" class="btn btn-primary mb-3">Agregar Detalle</button>
+        
+        <!-- Botón para eliminar el último campo de detalle del paquete (opcional) -->
+        <button type="button" id="eliminarDetalle" class="btn btn-danger mb-3">Eliminar Detalle</button>
+        
+        <!-- Botones de acción -->
+        <input type="submit" class="btn btn-success" value="Crear Envío">
+    </form>
+</div>
 
 
 <script src="auth.js"></script>
