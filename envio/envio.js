@@ -55,6 +55,45 @@ $.getScript('auth.js', function() {
         });
     }
 
+    function consultarDetalles() {
+        $('#consultaForm').submit(function (event) {
+            event.preventDefault();
+            var idEnvio = $('#idEnvio').val();
+            obtenerToken().then(function(token) {
+                $.ajax({
+                    url: "http://localhost:8080/detallepaquete/listar/" + idEnvio,
+                    method: "GET",
+                    headers: {
+                        "Authorization": "Bearer " + token
+                    },
+                    success: function (datos) {
+                        mostrarDatosDetalle(datos);
+                    }
+                });
+            });
+        });
+    }
+
+    $(document).ready(function () {
+        consultarDetalles();
+    });
+
+    function mostrarDatosDetalle(detallesPaquete) {
+        var tabla = "<table id='tablaDatos'>";
+        tabla += "<tr><th>Descripción</th><th>Cantidad</th></tr>";
+
+        for (var i =  0; i < detallesPaquete.length; i++) {
+            var detalle = detallesPaquete[i];
+            tabla += "<tr>";
+            tabla += "<td>" + detalle.descripcion + "</td>";
+            tabla += "<td>" + detalle.cantidad + "</td>";
+            tabla += "</tr>";
+        }
+
+        tabla += "</table>";
+        $('#contenedor-detalle-paquete').html(tabla);
+    }
+
     function mostrarDatosEnvio(datos) {
         $('#idGuia').val(datos.idGuia);
         $('#origen').val(datos.origen);
