@@ -1,12 +1,46 @@
 $.getScript('auth.js', function() {
+    function actualizarEnvio() {
+        obtenerToken().then(function (token) {
+            var data = {
+                idGuia: $('#idGuia').val(),
+                origen: $('#origen').val(),
+                destino: $('#destino').val(),
+                estado: $('#estado').val(),
+                observaciones: $('#observaciones').val()
+            };
 
+            $.ajax({
+                url: "http://localhost:8080/envio/actualizar",
+                method: "PUT",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                headers: {
+                    "Authorization": "Bearer " + token
+                },
+
+                success: function (respuesta) {
+                    console.log(respuesta);
+                    parent.location.href = "mostrarEnvio.html";
+                },
+                error: function (error) {
+                    console.error(error);
+
+                }
+            });
+        });
+    }
+
+    $('#form-editar-envio').on('submit', function (event) {
+        event.preventDefault();
+        actualizarEnvio();
+    });
 
 
     function consultarEnvio() {
         $('#consultaForm').submit(function (event) {
             event.preventDefault();
             var idEnvio = $('#idEnvio').val();
-            obtenerToken().then(function(token) {
+            obtenerToken().then(function (token) {
                 $.ajax({
                     url: "http://localhost:8080/envio/listar/" + idEnvio,
                     method: "GET",
@@ -21,71 +55,31 @@ $.getScript('auth.js', function() {
         });
     }
 
-    function mostrarDatosEnvio(envio) {
-        var tabla = "<table>";
-
-        tabla += "<tr><td>Número de rastreo</td><td><input type='text' value='" + envio.idGuia + "'></td></tr>";
-        tabla += "<tr><td>Origen</td><td><input type='text' value='" + envio.origen + "'></td></tr>";
-        tabla += "<tr><td>Destino</td><td><input type='text' value='" + envio.destino + "'></td></tr>";
-        tabla += "<tr><td>Estado</td><td><input type='text' value='" + envio.estado + "'></td></tr>";
-        tabla += "<tr><td>Observaciones</td><td><input type='text' value='" + envio.observaciones + "'></td></tr>";
-        tabla += "<tr><td>ID Remitente</td><td><input type='text' value='" + envio.remitente.idRemitente + "'></td></tr>";
-        tabla += "<tr><td>Remitente</td><td><input type='text' value='" + envio.remitente.nombreRemitente + "'></td></tr>";
-        tabla += "<tr><td>DNI Remitente</td><td><input type='text' value='" + envio.remitente.dniRemitente + "'></td></tr>";
-        tabla += "<tr><td>Teléfono Remitente</td><td><input type='text' value='" + envio.remitente.telefono + "'></td></tr>";
-        tabla += "<tr><td>ID Destinatario</td><td><input type='text' value='" + envio.destinatario.idDestinatario + "'></td></tr>";
-        tabla += "<tr><td>Destinatario</td><td><input type='text' value='" + envio.destinatario.nombreDestinatario + "'></td></tr>";
-        tabla += "<tr><td>Dirección Destinatario</td><td><input type='text' value='" + envio.destinatario.direccion + "'></td></tr>";
-        tabla += "<tr><td>Teléfono Destinatario</td><td><input type='text' value='" + envio.destinatario.telefono + "'></td></tr>";
-        tabla += "<tr><td>ID Paquete</td><td><input type='text' value='" + envio.paquete.idPaquete + "'></td></tr>";
-        tabla += "<tr><td>Peso del Paquete</td><td><input type='text' value='" + envio.paquete.peso + "'></td></tr>";
-        tabla += "<tr><td>Medidas del Paquete</td><td><input type='text' value='" + envio.paquete.medidas + "'></td></tr>";
-
-        $('#contenedor-envio').html(tabla);
+    function mostrarDatosEnvio(datos) {
+        $('#idGuia').val(datos.idGuia);
+        $('#origen').val(datos.origen);
+        $('#destino').val(datos.destino);
+        $('#estado').val(datos.estado);
+        $('#observaciones').val(datos.observaciones || '');
+        $('#idRemitente').val(datos.remitente.idRemitente);
+        $('#nombreRemitente').val(datos.remitente.nombreRemitente);
+        $('#dniRemitente').val(datos.remitente.dniRemitente);
+        $('#telefonoRemitente').val(datos.remitente.telefono);
+        $('#nombreDestinatario').val(datos.destinatario.nombreDestinatario);
+        $('#direccionDestinatario').val(datos.destinatario.direccion);
+        $('#telefonoDestinatario').val(datos.destinatario.telefono);
+        $('#idPaquete').val(datos.paquete.idPaquete);
+        $('#pesoPaquete').val(datos.paquete.peso);
+        $('#medidasPaquete').val(datos.paquete.medidas);
     }
 
+
     $(document).ready(function () {
+        // Llama a la función consultarEnvio cuando se cargue la página
         consultarEnvio();
     });
 
-    function consultarDetalles() {
-        $('#consultaForm').submit(function (event) {
-            event.preventDefault();
-            var idEnvio = $('#idEnvio').val();
-            obtenerToken().then(function(token) {
-                $.ajax({
-                    url: "http://localhost:8080/detallepaquete/listar/" + idEnvio,
-                    method: "GET",
-                    headers: {
-                        "Authorization": "Bearer " + token
-                    },
-                    success: function (datos) {
-                        mostrarDatosDetalle(datos);
-                    }
-                });
-            });
-        });
-    }
 
-    function mostrarDatosDetalle(detallesPaquete) {
-        var tabla = "<table id='tablaDatos'>";
-        tabla += "<tr><th>Descripción</th><th>Cantidad</th></tr>";
-
-        for (var i =  0; i < detallesPaquete.length; i++) {
-            var detalle = detallesPaquete[i];
-            tabla += "<tr>";
-            tabla += "<td>" + detalle.descripcion + "</td>";
-            tabla += "<td>" + detalle.cantidad + "</td>";
-            tabla += "</tr>";
-        }
-
-        tabla += "</table>";
-        $('#contenedor-detalle').html(tabla);
-    }
-
-    $(document).ready(function () {
-        consultarDetalles();
-    });
 
 
 
@@ -99,7 +93,7 @@ $.getScript('auth.js', function() {
                 var cantidad = $(this).find('input[name^="cantidad"]').val();
                 detallePaquete.push({ descripcion: descripcion, cantidad: cantidad });
             });
-    
+
             var data = {
                 origen: $('#origen').val(),
                 destino: $('#destino').val(),
@@ -121,7 +115,7 @@ $.getScript('auth.js', function() {
                 },
                 detallePaquete: detallePaquete // Usamos el array recogido anteriormente
             };
-    
+
             $.ajax({
                 url: "http://localhost:8080/envio/registrar",
                 method: "POST",

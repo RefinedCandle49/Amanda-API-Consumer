@@ -18,6 +18,6 @@ ul{
     list-style: none;
 }
 
-label{
+input, textarea, select{
     display: flex;
 }
