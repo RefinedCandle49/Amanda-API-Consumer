@@ -1,5 +1,7 @@
 $.getScript('auth.js', function() {
 
+
+
     function consultarEnvio() {
         $('#consultaForm').submit(function (event) {
             event.preventDefault();

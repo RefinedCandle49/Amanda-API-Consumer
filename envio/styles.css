@@ -17,3 +17,7 @@ ul{
     gap: 20px;
     list-style: none;
 }
+
+label{
+    display: flex;
+}
