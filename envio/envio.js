@@ -1,4 +1,36 @@
 $.getScript('auth.js', function() {
+
+    function eliminarEnvio() {
+        obtenerToken().then(function(token) {
+            var data = {
+                idGuia: $('#idEnvio').val()
+            };
+
+            $.ajax({
+                url: "http://localhost:8080/envio/eliminar",
+                method: "DELETE",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                headers: {
+                    "Authorization": "Bearer " + token
+                },
+
+                success: function (respuesta) {
+                    console.log(respuesta);
+                    parent.location.href = "mostrarEnvio.html";
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+    }
+
+
+    $(document).ready(function () {
+        $('#eliminar').click(eliminarEnvio);
+    });
+
     function actualizarEnvio() {
         obtenerToken().then(function (token) {
             var data = {
