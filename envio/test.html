@@ -56,6 +56,11 @@
 <h3>Interior del paquete</h3>
 <div id="contenedor-detalle">
     <!-- Campos editables -->
+    <label for="idRemitente">
+        <strong>ID Remitente:</strong>
+        <input type="text" id="idRemitente" name="idRemitente">
+    </label>
+    
     <label for="nombreRemitente">
         <strong>Nombre Remitente:</strong>
         <input type="text" id="nombreRemitente" name="nombreRemitente">
@@ -196,6 +201,7 @@
         $('#destino').val(datos.destino);
         $('#estado').val(datos.estado);
         $('#observaciones').val(datos.observaciones || '');
+        $('#idRemitente').val(datos.remitente.idRemitente);
         $('#nombreRemitente').val(datos.remitente.nombreRemitente);
         $('#dniRemitente').val(datos.remitente.dniRemitente);
         $('#telefonoRemitente').val(datos.remitente.telefono);
