@@ -35,7 +35,7 @@
 
 <div class="container mt-3">
 <!--    <h2>Crear envio</h2>-->
-    <form id="form-envio" method="post">
+    <form id="form-envio">
         <fieldset class="row border rounded-3 p-3">
             <legend class="float-none w-auto px-3">Información general</legend>
             <div class="col-md-6">
@@ -131,27 +131,31 @@
         
         <fieldset class="row border rounded-3 p-3">
             <legend class="float-none w-auto px-3">Detalle del Paquete</legend>
-            <div id="detallePaqueteContainer" class="row">
-                <div class="detallePaqueteItem col-md-6">
-                    <label for="descripcion" class="form-label">Descripción:</label>
-                    <input type="text" class="form-control" id="descripcion" name="descripcion">
+            <div id="detallePaqueteContainer" class="">
+                <div class="detallePaqueteItem row">
+                    <div class="col-md-6">
+                        <label for="descripcion" class="form-label">Descripción:</label>
+                        <input type="text" class="form-control" id="descripcion" name="descripcion">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="cantidad" class="form-label">Cantidad:</label>
+                        <input type="number" class="form-control" id="cantidad" name="cantidad">
+                    </div>
                     
                 </div>
-                <div class="detallePaqueteItem col-md-6">
-                    <label for="cantidad" class="form-label">Cantidad:</label>
-                    <input type="number" class="form-control" id="cantidad" name="cantidad">
-                </div>
+
             </div>
         
         </fieldset>
+
         <!-- Botón para agregar un nuevo campo de detalle del paquete -->
-        <button type="button" id="agregarDetalle" class="btn btn-primary mb-3">Agregar Detalle</button>
+        <button type="button" id="agregarDetalle" class="btn btn-primary mb-3 mt-2">Agregar Detalle</button>
         
         <!-- Botón para eliminar el último campo de detalle del paquete (opcional) -->
-        <button type="button" id="eliminarDetalle" class="btn btn-danger mb-3">Eliminar Detalle</button>
+        <button type="button" id="eliminarDetalle" class="btn btn-danger mb-3 mt-2">Eliminar Detalle</button>
         
         <!-- Botones de acción -->
-        <input type="submit" class="btn btn-success" value="Crear Envío">
+        <input type="submit" class="btn btn-success mb-3 mt-2" value="Crear Envío">
     </form>
 </div>
 

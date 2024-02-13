@@ -6,7 +6,18 @@ $.getScript('auth.js', function() {
                 origen: $('#origen').val(),
                 destino: $('#destino').val(),
                 estado: $('#estado').val(),
-                observaciones: $('#observaciones').val()
+                observaciones: $('#observaciones').val(),
+                remitente: {
+                    nombreRemitente: $('#nombreRemitente').val(),
+                    dniRemitente: $('#dniRemitente').val(),
+                    telefono: $('#telefonoRemitente').val(),
+                },
+                destinatario: {
+                    nombreDestinatario: $('#nombreDestinatario').val(),
+                    direccion: $('#direccionDestinatario').val(),
+                    telefono: $('#telefonoDestinatario').val()
+                }
+
             };
 
             $.ajax({
@@ -188,11 +199,14 @@ function agregarDetalle() {
     var container = $('#detallePaqueteContainer');
     var index = container.children('.detallePaqueteItem').length;
 
-    var newDetail = $('<div class="detallePaqueteItem">')
-        .append($('<label for="descripcion' + index + '">Descripción:</label><br>'))
-        .append($('<input type="text" id="descripcion' + index + '" name="descripcion' + index + '"><br>'))
-        .append($('<label for="cantidad' + index + '">Cantidad:</label><br>'))
-        .append($('<input type="number" id="cantidad' + index + '" name="cantidad' + index + '"><br>'));
+    var newDetail = $('<div class="detallePaqueteItem row">')
+        .append($('<div class="col-md-6">')
+            .append($('<label for="descripcion' + index + '" class="form-label">Descripción:</label>'))
+            .append($('<input type="text" class="form-control" id="descripcion' + index + '" name="descripcion' + index + '">')))
+        .append($('<div class="col-md-6">')
+            .append($('<label for="cantidad' + index + '" class="form-label">Cantidad:</label>'))
+            .append($('<input type="number" class="form-control" id="cantidad' + index + '" name="cantidad' + index + '">')));
+
 
     container.append(newDetail);
 }
