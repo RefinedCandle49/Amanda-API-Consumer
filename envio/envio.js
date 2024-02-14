@@ -122,20 +122,33 @@ $.getScript('auth.js', function() {
     });
 
     function mostrarDatosDetalle(detallesPaquete) {
-        var tabla = "<table id='tablaDatos'>";
-        tabla += "<tr><th>Descripción</th><th>Cantidad</th></tr>";
+        var contenidoHTML = '';
 
         for (var i =  0; i < detallesPaquete.length; i++) {
             var detalle = detallesPaquete[i];
-            tabla += "<tr>";
-            tabla += "<td>" + detalle.descripcion + "</td>";
-            tabla += "<td>" + detalle.cantidad + "</td>";
-            tabla += "</tr>";
+
+            // Crear un div para cada par de descripción y cantidad
+            contenidoHTML += '<div class="row">';
+
+            // Agregar el input y label para la descripción
+            contenidoHTML += '<div class="col-md-6">';
+            contenidoHTML += '<label for="descripcion-' + i + '" class="form-label">Descripción:</label>';
+            contenidoHTML += '<input type="text" class="form-control" id="descripcion-' + i + '" value="' + detalle.descripcion + '" disabled />';
+            contenidoHTML += '</div>';
+
+            // Agregar el input y label para la cantidad
+            contenidoHTML += '<div class="col-md-6">';
+            contenidoHTML += '<label for="cantidad-' + i + '" class="form-label">Cantidad:</label>';
+            contenidoHTML += '<input type="number" class="form-control" id="cantidad-' + i + '" value="' + detalle.cantidad + '" disabled />';
+            contenidoHTML += '</div>';
+
+            contenidoHTML += '</div>'; // Cierre del div row
         }
 
-        tabla += "</table>";
-        $('#contenedor-detalle-paquete').html(tabla);
+        // Reemplazar el contenido del div con id 'contenedor-detalle-paquete' con el nuevo HTML
+        $('#contenedor-detalle-paquete').html(contenidoHTML);
     }
+
 
     function mostrarDatosEnvio(datos) {
         $('#idGuia').val(datos.idGuia);
@@ -147,6 +160,7 @@ $.getScript('auth.js', function() {
         $('#nombreRemitente').val(datos.remitente.nombreRemitente);
         $('#dniRemitente').val(datos.remitente.dniRemitente);
         $('#telefonoRemitente').val(datos.remitente.telefono);
+        $('#idDestinatario').val(datos.destinatario.idDestinatario);
         $('#nombreDestinatario').val(datos.destinatario.nombreDestinatario);
         $('#direccionDestinatario').val(datos.destinatario.direccion);
         $('#telefonoDestinatario').val(datos.destinatario.telefono);

@@ -2,138 +2,166 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consulta de Envío</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <header>
-    <nav>
-        <ul>
-            <li>
-                <a href="registrar.html">Registrar</a>
-            </li>
-            <li>
-                <a href="mostrarEnvio.html">Rastrear envio</a>
-            </li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Amanda Envíos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav nav-underline">
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" href="registrar.html">Registrar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="mostrarEnvio.html">Rastrear envío</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 </header>
 <body>
-<h1>Consulta de Envío</h1>
-<form id="consultaForm">
-    <label for="idEnvio">ID del Envío:</label>
-    <input type="text" id="idEnvio" name="idEnvio">
-    <button type="submit">Consultar</button>
-    <button type="button" id="eliminar">Eliminar</button>
-</form>
-
-<form id="form-editar-envio" method="post">
-<div id="contenedor-envio">
+<div class="container mt-3">
+    <form id="consultaForm">
+        <div class="input-group mb-3 mx-auto" style="width: 25rem;">
+            <input type="text" class="form-control" id="idEnvio" name="idEnvio" placeholder="Ingresa el número de guia">
+            <button type="submit" class="btn btn-success">Consultar</button>
+            <button type="button" class="btn btn-danger" id="eliminar">Eliminar</button>
+        </div>
+        
+    </form>
     
-        <!-- Campos editables -->
-        <label for="idGuia">
-            <strong>ID Guía:</strong>
-            <input type="text" id="idGuia" name="idGuia">
-        </label>
+    <form id="form-editar-envio" method="post">
+        <input type="submit" class="btn mb-3 btn-warning" value="Actualizar">
+        <fieldset class="row border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">Información general</legend>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="idGuia" class="form-label">ID Guia:</label>
+                    <input type="text" class="form-control" disabled id="idGuia" name="idGuia">
+                </div>
+                <div class="form-group">
+                    <label for="origen" class="form-label">Origen:</label>
+                    <input type="text" class="form-control" id="origen" name="origen">
+                </div>
+                <div class="form-group">
+                    <label for="estado" class="form-label">Estado:</label>
+                    <select class="form-select" id="estado" name="estado">
+                        <option value="En tránsito">En tránsito</option>
+                        <option value="Entregado">Entregado</option>
+                        <option value="Retrasado">Retrasado</option>
+                        <option value="Cancelado">Cancelado</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="destino" class="form-label">Destino:</label>
+                    <input type="text" class="form-control" id="destino" name="destino">
+                </div>
+                <div class="form-group">
+                    <label for="observaciones" class="form-label">Observaciones:</label>
+                    <textarea class="form-control" id="observaciones" name="observaciones"></textarea>
+                </div>
+            </div>
         
+        </fieldset>
         
-        <label for="origen">
-            <strong>Origen:</strong>
-            <input type="text" id="origen" name="origen">
-        </label>
+        <fieldset class="row border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">Remitente</legend>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="idRemitente" class="form-label">ID Remitente:</label>
+                    <input type="text" class="form-control" disabled id="idRemitente" name="idRemitente">
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefonoRemitente" class="form-label">Teléfono Remitente:</label>
+                    <input type="tel" class="form-control" id="telefonoRemitente" name="telefonoRemitente">
+                </div>
+            
+            </div>
+            
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="nombreRemitente" class="form-label">Nombre Remitente:</label>
+                    <input type="text" class="form-control" id="nombreRemitente" name="nombreRemitente">
+                </div>
+                <div class="form-group">
+                    <label for="dniRemitente" class="form-label">DNI/RUC Remitente:</label>
+                    <input type="text" class="form-control" id="dniRemitente" name="dniRemitente">
+                </div>
+            </div>
         
+        </fieldset>
         
-        <label for="destino">
-            <strong>Destino:</strong>
-            <input type="text" id="destino" name="destino">
-        </label>
+        <fieldset class="row border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">Destinatario</legend>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="idDestinatario" class="form-label">ID Destinatario:</label>
+                    <input type="text" class="form-control" disabled id="idDestinatario" name="idDestinatario">
+                </div>
+                
+                <div class="form-group">
+                    <label for="direccionDestinatario" class="form-label">Dirección Destinatario:</label>
+                    <input type="text" class="form-control" id="direccionDestinatario" name="direccionDestinatario">
+                </div>
+            
+            </div>
+            
+            <div class="col-md-6">
+                
+                <div class="form-group">
+                    <label for="nombreDestinatario" class="form-label">Nombre Destinatario:</label>
+                    <input type="text" class="form-control" id="nombreDestinatario" name="nombreDestinatario">
+                    <label for="telefonoDestinatario" class="form-label">Teléfono Destinatario:</label>
+                    <input type="tel" class="form-control" id="telefonoDestinatario" name="telefonoDestinatario">
+                </div>
+            </div>
         
+        </fieldset>
+        <fieldset class="row border rounded-3 p-3">
+            <legend class="float-none w-auto px-3">Paquete</legend>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="idPaquete" class="form-label">ID Paquete:</label>
+                    <input type="text" class="form-control" disabled id="idPaquete" name="idPaquete">
+                </div>
+                <label for="medidas" class="form-label">Medidas:</label>
+                <div class="form-group input-group">
+                    <input type="text" class="form-control" disabled id="medidasPaquete" name="medidasPaquete">
+                    <span class="input-group-text">Metros</span>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <label for="pesoPaquete" class="form-label">Peso:</label>
+                <div class="form-group input-group">
+                    <input type="number" step="0.1" disabled class="form-control" id="pesoPaquete" name="pesoPaquete">
+                    <span class="input-group-text">Kilos</span>
+                </div>
+            </div>
         
-        <label for="estado">
-            <strong>Estado:</strong>
-            <input type="text" id="estado" name="estado">
-        </label>
+        </fieldset>
         
-        
-        <label for="observaciones">
-            <strong>Observaciones:</strong>
-            <textarea id="observaciones" name="observaciones"></textarea>
-        </label>
-        
-        <input type="submit" value="Actualizar">
-    
+    </form>
+    <fieldset class="row border rounded-3 p-3">
+        <legend class="float-none w-auto px-3">Detalle del paquete</legend>
+        <div id="contenedor-detalle-paquete"></div>
+    </fieldset>
     
 </div>
-
-
-<h3>Interior del paquete</h3>
-<div id="contenedor-detalle">
-    <!-- Campos editables -->
-    <label for="idRemitente">
-        <strong>ID Remitente:</strong>
-        <input type="text" id="idRemitente" name="idRemitente">
-    </label>
-    
-    <label for="nombreRemitente">
-        <strong>Nombre Remitente:</strong>
-        <input type="text" id="nombreRemitente" name="nombreRemitente">
-    </label>
-    
-    
-    <label for="dniRemitente">
-        <strong>DNI Remitente:</strong>
-        <input type="text" id="dniRemitente" name="dniRemitente">
-    </label>
-    
-    
-    <label for="telefonoRemitente">
-        <strong>Teléfono Remitente:</strong>
-        <input type="text" id="telefonoRemitente" name="telefonoRemitente">
-    </label>
-    
-    
-    <label for="nombreDestinatario">
-        <strong>Nombre Destinatario:</strong>
-        <input type="text" id="nombreDestinatario" name="nombreDestinatario">
-    </label>
-    
-    
-    <label for="direccionDestinatario">
-        <strong>Dirección Destinatario:</strong>
-        <input type="text" id="direccionDestinatario" name="direccionDestinatario">
-    </label>
-    
-    
-    <label for="telefonoDestinatario">
-        <strong>Teléfono Destinatario:</strong>
-        <input type="text" id="telefonoDestinatario" name="telefonoDestinatario">
-    </label>
-    
-    
-    <label for="idPaquete">
-        <strong>ID Paquete:</strong>
-        <input type="text" id="idPaquete" name="idPaquete">
-    </label>
-    
-    
-    <label for="pesoPaquete">
-        <strong>Peso Paquete:</strong>
-        <input type="text" id="pesoPaquete" name="pesoPaquete">
-    </label>
-    
-    
-    <label for="medidasPaquete">
-        <strong>Medidas Paquete:</strong>
-        <input type="text" id="medidasPaquete" name="medidasPaquete">
-    </label>
-    
-</div>
-</form>
-<h3>Interior del paquete</h3>
-
-<div id="contenedor-detalle-paquete"></div>
 
 
 <script src="envio.js"></script>
