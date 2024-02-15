@@ -40,7 +40,7 @@
         
     </form>
     
-    <form id="form-editar-envio" method="post">
+    <form id="form-editar-envio" class="was-validated" method="post">
         <input type="submit" class="btn mb-3 btn-warning" value="Actualizar">
         <fieldset class="row border rounded-3 p-3">
             <legend class="float-none w-auto px-3">Información general</legend>
@@ -51,11 +51,14 @@
                 </div>
                 <div class="form-group">
                     <label for="origen" class="form-label">Origen:</label>
-                    <input type="text" class="form-control" id="origen" name="origen">
+                    <input type="text" class="form-control" pattern="[A-Za-zÁÉÍÓÚáéíóúÜü0-9,&\.\s\/]+" title="Caracteres admitidos: A-Z a-z 0-9 & , -" maxlength="255" required id="origen" name="origen">
+                    <div class="invalid-feedback">
+                        Ingresa un origen.
+                    </div> 
                 </div>
                 <div class="form-group">
                     <label for="estado" class="form-label">Estado:</label>
-                    <select class="form-select" id="estado" name="estado">
+                    <select class="form-select" id="estado" name="estado" required>
                         <option value="En tránsito">En tránsito</option>
                         <option value="Entregado">Entregado</option>
                         <option value="Retrasado">Retrasado</option>
@@ -67,11 +70,14 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="destino" class="form-label">Destino:</label>
-                    <input type="text" class="form-control" id="destino" name="destino">
+                    <input type="text" class="form-control" id="destino" name="destino" required pattern="[A-Za-zÁÉÍÓÚáéíóúÜü0-9,&\.\s\/]+" title="Caracteres admitidos: A-Z a-z 0-9 & , -" maxlength="255">
+                    <div class="invalid-feedback">
+                        Ingresa un destino.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="observaciones" class="form-label">Observaciones:</label>
-                    <textarea class="form-control" id="observaciones" name="observaciones"></textarea>
+                    <textarea class="form-control" id="observaciones" name="observaciones"></textarea maxlength="255">
                 </div>
             </div>
         
@@ -87,19 +93,27 @@
                 
                 <div class="form-group">
                     <label for="telefonoRemitente" class="form-label">Teléfono Remitente:</label>
-                    <input type="tel" class="form-control" id="telefonoRemitente" name="telefonoRemitente">
+                    <input type="tel" class="form-control" id="telefonoRemitente" name="telefonoRemitente" pattern="[0-9]{1,}" title="Caracteres admitidos: 0-9" maxlength="9">
+                    <div class="invalid-feedback">
+                        Ingresa un teléfono, máximo 9 dígitos.
+                    </div>
                 </div>
-            
             </div>
             
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="nombreRemitente" class="form-label">Nombre Remitente:</label>
-                    <input type="text" class="form-control" id="nombreRemitente" name="nombreRemitente">
+                    <input type="text" class="form-control" id="nombreRemitente" name="nombreRemitente" required pattern="[A-Za-zÁÉÍÓÚáéíóúÜü\s]+" title="Caracteres admitidos: A-Z a-z" maxlength="100">
+                    <div class="invalid-feedback">
+                        Ingresa un remitente.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="dniRemitente" class="form-label">DNI/RUC Remitente:</label>
-                    <input type="text" class="form-control" id="dniRemitente" name="dniRemitente">
+                    <input type="text" class="form-control" id="dniRemitente" name="dniRemitente" required pattern="[0-9]{1,}" title="Caracteres admitidos 0-9" maxlength="11">
+                    <div class="invalid-feedback">
+                        Ingresa un DNI/RUC, máximo 11 dígitos.
+                    </div>
                 </div>
             </div>
         
@@ -115,18 +129,27 @@
                 
                 <div class="form-group">
                     <label for="direccionDestinatario" class="form-label">Dirección Destinatario:</label>
-                    <input type="text" class="form-control" id="direccionDestinatario" name="direccionDestinatario">
+                    <input type="text" class="form-control" id="direccionDestinatario" name="direccionDestinatario" required pattern="[A-Za-zÁÉÍÓÚáéíóúÜü0-9,&\.\s\/]+" title="Caracteres admitidos A-Z a-z 0-9 & , -" maxlength="255">
+                    <div class="invalid-feedback">
+                        Ingresa una direccion.
+                    </div>
                 </div>
-            
             </div>
             
             <div class="col-md-6">
                 
                 <div class="form-group">
                     <label for="nombreDestinatario" class="form-label">Nombre Destinatario:</label>
-                    <input type="text" class="form-control" id="nombreDestinatario" name="nombreDestinatario">
+                    <input type="text" class="form-control" id="nombreDestinatario" name="nombreDestinatario" required pattern="[A-Za-zÁÉÍÓÚáéíóúÜü\s]+" title="Caracteres admitidos: A-Z a-z" maxlength="100">
+                    <div class="invalid-feedback">
+                        Ingresa un destinatario.
+                    </div>
+
                     <label for="telefonoDestinatario" class="form-label">Teléfono Destinatario:</label>
-                    <input type="tel" class="form-control" id="telefonoDestinatario" name="telefonoDestinatario">
+                    <input type="tel" class="form-control" id="telefonoDestinatario" name="telefonoDestinatario" required pattern="[0-9]{1,}" title="Caracteres admitidos: 0-9" maxlength="9">
+                    <div class="invalid-feedback">
+                        Ingresa un telefono, máximo 9 dígitos.
+                    </div>
                 </div>
             </div>
         
@@ -160,7 +183,6 @@
         <legend class="float-none w-auto px-3">Detalle del paquete</legend>
         <div id="contenedor-detalle-paquete"></div>
     </fieldset>
-    
 </div>
 
 

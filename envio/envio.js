@@ -248,10 +248,10 @@ function agregarDetalle() {
     var newDetail = $('<div class="detallePaqueteItem row">')
         .append($('<div class="col-md-6">')
             .append($('<label for="descripcion' + index + '" class="form-label">Descripción:</label>'))
-            .append($('<input type="text" class="form-control" id="descripcion' + index + '" name="descripcion' + index + '">')))
+            .append($('<input type="text" required class="form-control" maxlength="255" id="descripcion' + index + '" name="descripcion' + index + '">')))
         .append($('<div class="col-md-6">')
             .append($('<label for="cantidad' + index + '" class="form-label">Cantidad:</label>'))
-            .append($('<input type="number" class="form-control" id="cantidad' + index + '" name="cantidad' + index + '">')));
+            .append($('<input type="text" required class="form-control" pattern="[0-9]{1,}" title="Caracteres admitidos 0-9" min="0" id="cantidad' + index + '" name="cantidad' + index + '">')));
 
 
     container.append(newDetail);
